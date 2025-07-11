@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home - Equality RP</title>
+    <link rel="icon" type="image/png" href="./logo.png" />
+    <script src="https://kit.fontawesome.com/eb544e6cc4.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700;900&display=swap" rel="stylesheet"> 
+    <link href="css/main.css?rnd=1.0.0" rel="stylesheet">
+    <link href="css/home.css?rnd=1.0.0" rel="stylesheet">
+    <meta name="theme-color" content="#0042ff">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:creator" content="@EqualityRP">
+    <meta property="og:url" content="https://yourwebsite.com/">
+    <meta property="og:title" content="Home - Equality RP">
+    <meta property="og:description" content="Equality RP is a FiveM roleplay server committed to high-quality RP and community engagement. Join us and become part of the family."> 
+    <meta property="og:image" content="https://yourcdn.com/equalityrp/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+             :root {
+            --logo: url(./logo.png);
+            --background-color: 0, 0, 55, 0.88;
+            --background-image: url('./image.png');
+        }
+        body {
+            color: white;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-image: var(--background-image);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed; /* Optional for parallax feel */
+}
+
+
+input, button, label {
+    font-family: 'Roboto', sans-serif;
+}
+
+.dropdown {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(var(--background-color));
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .25s ease, opacity .25s ease;
+}
+
+.dropdown.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dropdown.active ~ .navbar .left {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.dropdown.active ~ .navbar .right .sandwichOptions .sandwich.open {
+    display: none;
+}
+
+.dropdown.active ~ .navbar .right .sandwichOptions .sandwich.close {
+    display: block;
+}
+
+.dropdown .container a {
+    display: block;
+    font-size: 4vh;
+    color: #fff;
+    margin: 0;
+    margin-bottom: 2vh;
+    text-align: center;
+    text-decoration: none;
+}
+
+.preloader {
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(var(--background-color));
+    transition: visibility .75s ease, opacity .75s ease;
+    z-index: 4;
+}
+
+.preloader.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(var(--background-color), .75);
+    box-shadow: inset 0 0 100vh 10vh rgb(var(--background-color));
+}
+
+.navbar {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    padding: 3vh 10%;
+    width: 80%;
+    align-items: center;
+    transition: padding .5s ease, background-color .5s ease;
+}
+
+.navbar.scrolled {
+    padding: 2vh 10%;
+    background-color: rgb(var(--gradient-one));
+}
+
+.navbar.dropdownShown {
+    padding: 3vh 10%;
+    background-color: transparent;
+}
+
+.navbar .left {
+    display: flex;
+    font-size: 4vh;
+    color: #fff;
+    align-items: center;
+    font-weight: 900;
+}
+
+.navbar .left img {
+    height: 8vh;
+    width: auto;
+    padding-right: 1vw;
+}
+
+.navbar .right {
+    flex-grow: 100;
+    text-align: right;
+}
+
+.navbar .right a, .navbar .right .dropdownLink {
+    display: inline-block;
+    position: relative;
+    font-size: 2vh;
+    color: #fff;
+    text-decoration: none;
+    margin-left: 2.5%;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.navbar .right .links {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.navbar .right .links a:after {
+    position: absolute;
+    left: 0;
+    bottom: -.75vh;
+    width: 0%;
+    content: '';
+    height: .3vh;
+    background-color: #fff;
+    transition: width .5s ease;
+}
+
+.navbar .right .links a.active:after, .navbar .right .links a:hover:after {
+    width: 100%;
+}
+
+.navbar .right .links .dropdownLink {
+    display: inline-flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.navbar .right .links .dropdownLink.active:after {
+    position: absolute;
+    left: 0;
+    bottom: -.75vh;
+    width: 100%;
+    content: '';
+    height: .3vh;
+    background-color: #fff;
+    transition: width .5s ease;
+}
+
+.navbar .right .links .dropdownLink i.fa-caret-down {
+    margin-left: .5vw;
+}
+
+.navbar .right .links .dropdownLink .dropdownLinks {
+    display: flex;
+    position: absolute;
+    width: auto;
+    top: 5vh;
+    white-space: nowrap;
+    justify-content: center;
+    background-color: rgb(var(--gradient-two));
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .1s ease, visibility .11s ease;
+}
+
+.navbar .right .links .dropdownLink.shown .dropdownLinks {
+    visibility: visible;
+    opacity: 1;
+}
+
+.navbar .right .links .dropdownLink .dropdownLinks i {
+    position: absolute;
+    top: -1.5vh;
+    font-size: 3vh;
+    color: rgb(var(--gradient-two));
+}
+
+.navbar .right .links .dropdownLink .dropdownLinks a {
+    display: block;
+    padding: 1.5vh 1vw;
+    margin-left: 0%;
+    transition: background-color .5s ease;
+}
+
+.navbar .right .links .dropdownLink .dropdownLinks a:hover {
+    background-color: rgb(var(--gradient-one));
+}
+
+.navbar .right .links .dropdownLink .dropdownLinks a:hover:after {
+    width: 0%;
+}
+
+.navbar .right .sandwichOptions {
+    display: none;
+}
+
+.navbar .right .sandwichOptions .sandwich {
+    font-size: 3vh;
+    cursor: pointer;
+}
+
+.navbar .right .sandwichOptions .sandwich.close {
+    display: none;
+    font-size: 3.5vh;
+}
+
+.navbar .right .account {
+    margin-left: 2.5%;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.navbar .right .account::after {
+    width: 0% !important;
+}
+
+.navbar .right .account.icon {
+    margin-bottom: 0vh;
+    padding-bottom: 0vh;
+}
+
+.navbar .right .account .avatar {
+    height: 3.5vh;
+    width: 3.5vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.navbar .right .account .dd {
+    display: inline-flex;
+    position: absolute;
+    top: 5vh;
+    left: -2.85vw;
+    visibility: hidden;
+    opacity: 0;
+    background-color: rgb(var(--background-color));
+    z-index: 5;
+    text-align: center;
+    transition: opacity .2s ease, visibility .2s ease;
+    padding-bottom: 0vh;
+    width: 7.5vw;
+    flex-wrap: wrap;
+    border-radius: .3vh;
+    color: #fff;
+    font-size: 2vh;
+}
+
+.navbar .right .account .dd i {
+    position: absolute;
+    top: -1.1vh;
+    margin-left: 0%;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    color: rgb(var(--background-color));
+}
+
+.navbar .right .account .dd.shown {
+    opacity: 1;
+    visibility: visible;
+}
+
+.navbar .right .account .dd a {
+    display: block;
+    width: 100%;
+    padding: .75vh 0vw;
+    color: #fff;
+    margin-left: 0;
+    transition: background-color .3s ease, color .3s ease;
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+}
+
+.navbar .right .account .dd a:nth-child(2) {
+    border-top-left-radius: .3vh;
+    border-top-right-radius: .3vh;
+}
+
+.navbar .right .account .dd a:last-child {
+    border-bottom-left-radius: .3vh;
+    border-bottom-right-radius: .3vh;
+}
+
+.navbar .right .account .dd a:hover {
+    background-color: rgb(var(--gradient-one));
+    color: #fff;
+}
+
+.navbar .right .more .dd a:hover::after, .navbar .right .account .dd a:hover::after, .navbar .right .dropdownbtn {
+    width: 0%;
+}
+
+.navbar .right .account:hover::after, .navbar .right a.cart:hover::after {
+    width: 0%;
+}
+
+@media screen and (max-width: 600px), (orientation : portrait) {
+    .navbar .right .links {
+        display: none;
+    }
+
+    .navbar .right .sandwichOptions {
+        display: block;
+    }
+}
+
+.information {
+    position: relative;
+    z-index: 2;
+    padding: 15vh 10vw;
+    text-align: center;
+    color: white;
+}
+
+.information .contain h1 {
+    font-size: 6vh;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 2vh;
+    text-shadow: 0 0 10px rgba(255,255,255,0.25);
+}
+
+.information .contain p {
+    font-size: 2.5vh;
+    font-weight: 400;
+    color: #eeeeee;
+    max-width: 800px;
+    margin: 0 auto 3vh auto;
+    line-height: 1.6;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.information .contain a {
+    display: inline-block;
+    font-size: 2vh;
+    font-weight: 600;
+    padding: 1.2vh 2.5vh;
+    margin: 0 1vh;
+    color: #fff;
+    background: rgba(0, 66, 255, 0.9);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.information .contain a:hover {
+    background: rgba(0, 90, 255, 1);
+}
+
+   
+    </style>
+</head>
+<body>
+    <section class="dropdown">
+        <div class="container">
+            <a href="">Home</a>
+            <a href="about">About</a>
+            <a href="departments/police">Police Department</a>
+            <a href="departments/ems">EMS</a>
+            <a href="contact">Contact</a>
+            <a href="discord">Discord</a>
+        </div>
+    </section>
+
+    <section class="preloader"></section>
+    <section class="overlay"></section>
+
+    <section class="navbar">
+        <div class="left">
+            <img src="./logo.png" alt="Equality RP Logo">
+        </div>
+        <div class="right">
+            <div class="links">
+                <a class='active' href="">Home</a>
+                <a href="about">About</a>
+                <div class="dropdownLink item-3" onclick="showMore('item-3')">
+                    Departments <i class="fa-solid fa-caret-down"></i>
+                    <div class="dropdownLinks">
+                        <i class="fa-solid fa-caret-up"></i>
+                        <div class="container">
+                            <a href="departments/police">Police Department</a>
+                            <a href="departments/ems">EMS</a>
+                            <a href="departments/civilian">Civilian Operations</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="contact">Contact</a>
+                <a href="https://wasteland-llc.tebex.io/category/equality-roleplay">Support Us</a>
+                <a href="discord">Discord</a>
+                <a href="auth/discord?url=" class="account icon">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+            </div>
+            <div class="sandwichOptions">
+                <a class="sandwich open" onclick="dropdown()"><i class="fa-solid fa-bars"></i></a>
+                <a class="sandwich close" onclick="dropdown()"><i class="fa-solid fa-xmark"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="information">
+        <div class="contain">
+            <h1>Equality RP</h1>
+            <p>A FiveM server focused on immersive, respectful, and exciting roleplay experiences. Based on realism, fun, and equality.</p>
+            <a href="#apply">Join Us</a>
+            <a href="#connect">Connect</a>
+        </div>
+    </section>
+
+
+<!-- Spacer to force scroll -->
+<div class="h-[25vh]"></div>
+
+<section class="bg-black bg-opacity-90 text-white py-24 px-6 md:px-20" id="explore">
+  <div class="max-w-6xl mx-auto space-y-16">
+    <div class="text-center" data-aos="fade-up" data-aos-duration="800">
+      <h2 class="text-4xl font-extrabold tracking-tight mb-4">Explore What Equality RP Offers</h2>
+      <p class="text-lg text-gray-300">Scroll through our departments, jobs, and community — discover your path.</p>
+    </div>
+
+    <!-- LEO Section -->
+    <div data-aos="fade-up" data-aos-delay="200" class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-800 p-6 rounded-2xl shadow-md hover:scale-105 transition">
+        <div class="text-2xl mb-2">👮 Cop</div>
+        <h3 class="font-bold text-xl">Los Santos PD</h3>
+        <p class="text-gray-400">Serve & protect the community with professionalism.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-2xl shadow-md hover:scale-105 transition">
+        <div class="text-2xl mb-2">🚑 Medic</div>
+        <h3 class="font-bold text-xl">Fire/EMS</h3>
+        <p class="text-gray-400">Save lives with fast-paced medical roleplay.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-2xl shadow-md hover:scale-105 transition">
+        <div class="text-2xl mb-2">👮‍♂️ Deputy</div>
+        <h3 class="font-bold text-xl">Sheriff's Dept</h3>
+        <p class="text-gray-400">Patrol the county and uphold the law with authority.</p>
+      </div>
+    </div>
+
+    <!-- Jobs -->
+    <div data-aos="fade-up" data-aos-delay="400" class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-800 p-6 rounded-2xl shadow-md">
+        <div class="text-2xl mb-2">🔧 Mechanic</div>
+        <h3 class="font-bold text-xl">Garages</h3>
+        <p class="text-gray-400">Fix and customize vehicles across the city.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-2xl shadow-md">
+        <div class="text-2xl mb-2">🚛 Logistics</div>
+        <h3 class="font-bold text-xl">Trucking</h3>
+        <p class="text-gray-400">Drive goods across San Andreas and make cash.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-2xl shadow-md">
+        <div class="text-2xl mb-2">🚕 Taxi</div>
+        <h3 class="font-bold text-xl">Transportation</h3>
+        <p class="text-gray-400">Pick up fares and explore every street.</p>
+      </div>
+    </div>
+
+    <!-- Illegal -->
+    <div data-aos="fade-up" data-aos-delay="600" class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-800 p-6 rounded-2xl shadow-md">
+        <div class="text-2xl mb-2">🌿 Grow Weed</div>
+        <h3 class="font-bold text-xl">Farming</h3>
+        <p class="text-gray-400">Cultivate and distribute discreetly.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-2xl shadow-md">
+        <div class="text-2xl mb-2">🧪 Meth Lab</div>
+        <h3 class="font-bold text-xl">Production</h3>
+        <p class="text-gray-400">Cook product and build your empire.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-2xl shadow-md">
+        <div class="text-2xl mb-2">🚕 Taxi Front</div>
+        <h3 class="font-bold text-xl">Disguise Ops</h3>
+        <p class="text-gray-400">Move under the radar with cover jobs.</p>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="text-center pt-16 border-t border-white/10" data-aos="fade-up" data-aos-delay="800">
+      <h3 class="text-2xl font-semibold mb-6">Community Stats</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-xl font-bold text-white">
+        <div><div class="text-3xl">1,743</div><p class="text-sm text-gray-400">Users</p></div>
+        <div><div class="text-3xl">5,000</div><p class="text-sm text-gray-400">Characters</p></div>
+        <div><div class="text-3xl">15+</div><p class="text-sm text-gray-400">Factions</p></div>
+        <div><div class="text-3xl">90</div><p class="text-sm text-gray-400">Staff Online</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    
+<script>
+    window.onload = function() {
+    document.querySelector(".preloader").classList.add("hidden")
+}
+
+$(window).click(function() {
+    var dropdowns = document.getElementsByClassName("dropdownLink");
+
+    if(document.body.contains(document.querySelector(".navbar .right .account .dd"))) {
+        document.querySelector(".navbar .right .account .dd").classList.remove("shown");
+    }
+
+    if(document.body.contains(document.querySelector(".modal"))) {
+        document.querySelector(".modal").classList.remove("shown");
+    }
+
+    for(var i = 0; i < dropdowns.length; i++) {
+        dropdowns[i].classList.remove("shown");
+    }
+});
+
+$('.navbar .right .dropdownLink').click(function(event){
+    event.stopPropagation();
+});
+
+$('.navbar .right .account').click(function(event){
+    event.stopPropagation();
+});
+
+$('.modal .container').click(function(event){
+    event.stopPropagation();
+});
+
+$('.products .product').click(function(event){
+    event.stopPropagation();
+});
+
+
+window.addEventListener("scroll", function() {
+    var offset = window.pageYOffset;
+    var navbar = document.querySelector(".navbar");
+  
+    if(offset > 50) {
+        navbar.classList.add("scrolled");
+    }
+  
+    else {
+        navbar.classList.remove("scrolled");
+    }
+});
+
+function dropdown() {
+    document.querySelector(".dropdown").classList.toggle("active")
+    document.querySelector(".navbar").classList.toggle("dropdownShown")
+}
+
+function showMore(name) {
+    document.querySelector(".navbar .right .dropdownLink." + name).classList.toggle("shown")
+}
+
+function showAccountOptions() {
+    document.querySelector(".navbar .right .account .dd").classList.toggle("shown");
+}
+</script>
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+</body>
+</html>
