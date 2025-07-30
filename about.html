@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About - Equality RP</title>
+  <link rel="icon" type="image/png" href="./logo.png" />
+  <script src="https://kit.fontawesome.com/eb544e6cc4.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700;900&display=swap" rel="stylesheet">
+  <link href="../css/main.css?rnd=1.2.1" rel="stylesheet">
+  <meta name="theme-color" content="#0042ff">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:creator" content="@EqualityRP">
+  <meta property="og:url" content="https://yourwebsite.com/about">
+  <meta property="og:title" content="About - Equality RP">
+  <meta property="og:description" content="Equality RP is a FiveM roleplay server committed to high-quality RP and community engagement.">
+  <meta property="og:image" content="https://yourcdn.com/equalityrp/logo.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <style>
+body {
+    min-height: 100vh;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+}
+
+.preloader {
+    position: fixed;
+    top: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+}
+
+.about {
+    position: relative;
+    z-index: 2;
+    width: 80%;
+    padding: 20vh 10% 5vh 10%;
+}
+
+.about h1 {
+    display: flex;
+    position: relative;
+    font-size: 2.25vh;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    margin-bottom: 1.5vh;
+    text-align: center;
+    justify-content: center;
+}
+
+.about h1::after {
+    display: block;
+    position: absolute;
+    content: '';
+    bottom: -1vh;
+    height: .2vh;
+    width: 3%;
+    background-color: #fff;
+}
+
+.about p {
+    margin: 5vh 0vh 0vh 0vh;
+    font-size: 1.6vh;
+    color: #fff;
+    line-height: 1.5;
+}
+
+@media screen and (max-width: 600px), (orientation : portrait) {
+    .about h1 {
+        font-size: 3vh;
+    }
+
+    .about h1::after {
+        width: 10%;
+    }
+}
+
+
+:root {
+            --logo: url(./logo.png);
+            --background-color: 0, 0, 55, 0.88;
+            --background-image: url('./image.png');
+        }
+        body {
+            color: white;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-image: var(--background-image);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed; /* Optional for parallax feel */
+}
+
+
+input, button, label {
+    font-family: 'Roboto', sans-serif;
+}
+
+.dropdown {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(var(--background-color));
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .25s ease, opacity .25s ease;
+}
+
+.dropdown.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dropdown.active ~ .navbar .left {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.dropdown.active ~ .navbar .right .sandwichOptions .sandwich.open {
+    display: none;
+}
+
+.dropdown.active ~ .navbar .right .sandwichOptions .sandwich.close {
+    display: block;
+}
+
+.dropdown .container a {
+    display: block;
+    font-size: 4vh;
+    color: #fff;
+    margin: 0;
+    margin-bottom: 2vh;
+    text-align: center;
+    text-decoration: none;
+}
+
+.preloader {
+    visibility: visible;
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(var(--background-color));
+    transition: visibility .75s ease, opacity .75s ease;
+    z-index: 4;
+}
+
+.preloader.hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(var(--background-color), .75);
+    box-shadow: inset 0 0 100vh 10vh rgb(var(--background-color));
+}
+
+.navbar {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    padding: 3vh 10%;
+    width: 80%;
+    align-items: center;
+    transition: padding .5s ease, background-color .5s ease;
+}
+
+.navbar.scrolled {
+    padding: 2vh 10%;
+    background-color: rgb(var(--gradient-one));
+}
+
+.navbar.dropdownShown {
+    padding: 3vh 10%;
+    background-color: transparent;
+}
+
+.navbar .left {
+    display: flex;
+    font-size: 4vh;
+    color: #fff;
+    align-items: center;
+    font-weight: 900;
+}
+
+.navbar .left img {
+    height: 8vh;
+    width: auto;
+    padding-right: 1vw;
+}
+
+.navbar .right {
+    flex-grow: 100;
+    text-align: right;
+}
+
+.navbar .right a, .navbar .right .dropdownLink {
+    display: inline-block;
+    position: relative;
+    font-size: 2vh;
+    color: #fff;
+    text-decoration: none;
+    margin-left: 2.5%;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.navbar .right .links {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.navbar .right .links a:after {
+    position: absolute;
+    left: 0;
+    bottom: -.75vh;
+    width: 0%;
+    content: '';
+    height: .3vh;
+    background-color: #fff;
+    transition: width .5s ease;
+}
+
+.navbar .right .links a.active:after, .navbar .right .links a:hover:after {
+    width: 100%;
+}
+
+.navbar .right .links .dropdownLink {
+    display: inline-flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.navbar .right .links .dropdownLink.active:after {
+    position: absolute;
+    left: 0;
+    bottom: -.75vh;
+    width: 100%;
+    content: '';
+    height: .3vh;
+    background-color: #fff;
+    transition: width .5s ease;
+}
+
+.navbar .right .links .dropdownLink i.fa-caret-down {
+    margin-left: .5vw;
+}
+
+.navbar .right .links .dropdownLink .dropdownLinks {
+    display: flex;
+    position: absolute;
+    width: auto;
+    top: 5vh;
+    white-space: nowrap;
+    justify-content: center;
+    background-color: rgb(var(--gradient-two));
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .1s ease, visibility .11s ease;
+}
+
+.navbar .right .links .dropdownLink.shown .dropdownLinks {
+    visibility: visible;
+    opacity: 1;
+}
+
+.navbar .right .links .dropdownLink .dropdownLinks i {
+    position: absolute;
+    top: -1.5vh;
+    font-size: 3vh;
+    color: rgb(var(--gradient-two));
+}
+
+.navbar .right .links .dropdownLink .dropdownLinks a {
+    display: block;
+    padding: 1.5vh 1vw;
+    margin-left: 0%;
+    transition: background-color .5s ease;
+}
+
+.navbar .right .links .dropdownLink .dropdownLinks a:hover {
+    background-color: rgb(var(--gradient-one));
+}
+
+.navbar .right .links .dropdownLink .dropdownLinks a:hover:after {
+    width: 0%;
+}
+
+.navbar .right .sandwichOptions {
+    display: none;
+}
+
+.navbar .right .sandwichOptions .sandwich {
+    font-size: 3vh;
+    cursor: pointer;
+}
+
+.navbar .right .sandwichOptions .sandwich.close {
+    display: none;
+    font-size: 3.5vh;
+}
+
+.navbar .right .account {
+    margin-left: 2.5%;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+
+.navbar .right .account::after {
+    width: 0% !important;
+}
+
+.navbar .right .account.icon {
+    margin-bottom: 0vh;
+    padding-bottom: 0vh;
+}
+
+.navbar .right .account .avatar {
+    height: 3.5vh;
+    width: 3.5vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.navbar .right .account .dd {
+    display: inline-flex;
+    position: absolute;
+    top: 5vh;
+    left: -2.85vw;
+    visibility: hidden;
+    opacity: 0;
+    background-color: rgb(var(--background-color));
+    z-index: 5;
+    text-align: center;
+    transition: opacity .2s ease, visibility .2s ease;
+    padding-bottom: 0vh;
+    width: 7.5vw;
+    flex-wrap: wrap;
+    border-radius: .3vh;
+    color: #fff;
+    font-size: 2vh;
+}
+
+.navbar .right .account .dd i {
+    position: absolute;
+    top: -1.1vh;
+    margin-left: 0%;
+    width: 100%;
+    left: 0;
+    text-align: center;
+    color: rgb(var(--background-color));
+}
+
+.navbar .right .account .dd.shown {
+    opacity: 1;
+    visibility: visible;
+}
+
+.navbar .right .account .dd a {
+    display: block;
+    width: 100%;
+    padding: .75vh 0vw;
+    color: #fff;
+    margin-left: 0;
+    transition: background-color .3s ease, color .3s ease;
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+}
+
+.navbar .right .account .dd a:nth-child(2) {
+    border-top-left-radius: .3vh;
+    border-top-right-radius: .3vh;
+}
+
+.navbar .right .account .dd a:last-child {
+    border-bottom-left-radius: .3vh;
+    border-bottom-right-radius: .3vh;
+}
+
+.navbar .right .account .dd a:hover {
+    background-color: rgb(var(--gradient-one));
+    color: #fff;
+}
+
+.navbar .right .more .dd a:hover::after, .navbar .right .account .dd a:hover::after, .navbar .right .dropdownbtn {
+    width: 0%;
+}
+
+.navbar .right .account:hover::after, .navbar .right a.cart:hover::after {
+    width: 0%;
+}
+
+@media screen and (max-width: 600px), (orientation : portrait) {
+    .navbar .right .links {
+        display: none;
+    }
+
+    .navbar .right .sandwichOptions {
+        display: block;
+    }
+}
+
+.information {
+    position: relative;
+    z-index: 2;
+    padding: 15vh 10vw;
+    text-align: center;
+    color: white;
+}
+
+.information .contain h1 {
+    font-size: 6vh;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 2vh;
+    text-shadow: 0 0 10px rgba(255,255,255,0.25);
+}
+
+.information .contain p {
+    font-size: 2.5vh;
+    font-weight: 400;
+    color: #eeeeee;
+    max-width: 800px;
+    margin: 0 auto 3vh auto;
+    line-height: 1.6;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.information .contain a {
+    display: inline-block;
+    font-size: 2vh;
+    font-weight: 600;
+    padding: 1.2vh 2.5vh;
+    margin: 0 1vh;
+    color: #fff;
+    background: rgba(0, 66, 255, 0.9);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.information .contain a:hover {
+    background: rgba(0, 90, 255, 1);
+}
+
+  </style>
+</head>
+<body>
+  <section class="navbar">
+    <div class="left">
+      <img src="./logo.png" alt="Equality RP Logo">
+    </div>
+    <div class="right">
+      <div class="links">
+        <a href="../">Home</a>
+        <a class='active' href="../about">About</a>
+        <div class="dropdownLink item-3" onclick="showMore('item-3')">
+          Departments <i class="fa-solid fa-caret-down"></i>
+          <div class="dropdownLinks">
+            <i class="fa-solid fa-caret-up"></i>
+            <div class="container">
+              <a href="../departments/police">Police Department</a>
+              <a href="../departments/ems">EMS</a>
+              <a href="../departments/civilian">Civilian Operations</a>
+            </div>
+          </div>
+        </div>
+        <a href="../contact">Contact</a>
+        <a href="https://wasteland-llc.tebex.io/category/equality-roleplay">Support Us</a>
+        <a href="../discord">Discord</a>
+        <a href="../auth/discord?url=about" class="account icon">
+          <i class="fa-solid fa-user"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <h1>About Equality RP</h1>
+    <p>
+      Equality RP is a FiveM roleplay community built around immersive storytelling, fair treatment, and high-quality law enforcement and civilian RP. We’re dedicated to creating a fun and respectful environment for everyone. Whether you’re patrolling the streets, saving lives, or living your best civilian life, Equality RP is where your story begins.
+    </p>
+  </section>
+
+  <script>
+    function showMore(name) {
+      document.querySelector(".navbar .right .dropdownLink." + name).classList.toggle("shown");
+    }
+  </script>
+</body>
+</html>
